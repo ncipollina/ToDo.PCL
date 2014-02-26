@@ -1,0 +1,44 @@
+﻿<Page
+    x:Class="Store.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Store"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+	<Page.Resources>
+		<ItemsPanelTemplate x:Key="ItemsPanelTemplate">
+			<WrapGrid MaximumRowsOrColumns="10"/>
+		</ItemsPanelTemplate>
+		<DataTemplate x:Key="ToDoItemTemplate">
+			<StackPanel>
+				<TextBlock TextWrapping="Wrap" Text="{Binding Text}" Width="300" />
+                <TextBlock Text="{Binding TimeStamp}"/>
+			</StackPanel>
+		</DataTemplate>
+	</Page.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="150"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="My To Do List" FontSize="40" Grid.Row="0" Margin="20,20,0,20"/>
+        <GridView x:Name="ItemsGrid" Grid.Row="1" ItemsPanel="{StaticResource ItemsPanelTemplate}" 
+                  ItemTemplate="{StaticResource ToDoItemTemplate}" 
+                  SelectionMode="None" Margin="20" 
+                  ItemClick="ItemsGrid_ItemClick" 
+                  IsItemClickEnabled="True"/>
+
+
+    </Grid>
+    <Page.BottomAppBar>
+        <CommandBar>
+            <AppBarButton Label="Add Item" Click="AppBarButton_Click">
+                <AppBarButton.Icon>
+                    <SymbolIcon Symbol="Add"/>
+                </AppBarButton.Icon>
+            </AppBarButton>
+        </CommandBar>
+    </Page.BottomAppBar>
+</Page>
