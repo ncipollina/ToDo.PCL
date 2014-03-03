@@ -51,6 +51,17 @@ namespace Phone
             ToDoList.ItemsSource = await database.GetAllToDos();
         }
 
+        private void ApplicationBarIconButton_Click(object sender, EventArgs e)
+        {
+            App.RootFrame.Navigate(new Uri("/ToDoItem.xaml", UriKind.RelativeOrAbsolute));
+        }
+
+        private void ToDoList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var item = ((LongListSelector)sender).SelectedItem as ToDo;
+            App.RootFrame.Navigate(new Uri(string.Format("/ToDoItem.xaml?parameter={0}", item.Id), UriKind.RelativeOrAbsolute));
+        }
+
         // Sample code for building a localized ApplicationBar
         //private void BuildLocalizedApplicationBar()
         //{
